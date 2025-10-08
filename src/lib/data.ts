@@ -25,6 +25,13 @@ export type Issue = {
   resolved: boolean;
 };
 
+export type Event = {
+  id: string;
+  name: string;
+  date: Date;
+  location: string;
+};
+
 export const attendees: Attendee[] = [
   { id: 'att-1', name: 'John Doe', email: 'john.d@example.com', phone: '123-456-7890', avatarUrl: 'https://picsum.photos/seed/avatar1/100/100' },
   { id: 'att-2', name: 'Jane Smith', email: 'jane.s@example.com', phone: '234-567-8901', avatarUrl: 'https://picsum.photos/seed/avatar2/100/100' },
@@ -39,4 +46,10 @@ export const equipment: Equipment[] = [
 
 export const issues: Issue[] = [
   { id: 'is-1', equipmentId: 'HP-00789', description: 'Left ear has no sound.', reportedAt: new Date(), category: 'Audio', severity: 'medium', resolved: false },
+];
+
+export const events: Event[] = [
+  { id: 'evt-1', name: 'Summer Fest 2024', date: new Date('2024-08-15T09:00:00'), location: 'Central Park' },
+  { id: 'evt-2', name: 'Tech Conference 2024', date: new Date('2024-09-22T10:00:00'), location: 'Convention Center' },
+  { id: 'evt-3', name: 'Winter Gala 2024', date: new Date('2024-12-05T18:00:00'), location: 'Grand Ballroom' },
 ];

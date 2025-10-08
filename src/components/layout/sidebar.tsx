@@ -9,7 +9,8 @@ import {
   Home,
   QrCode,
   Wrench,
-  Users
+  Users,
+  PartyPopper
 } from 'lucide-react';
 import {
   Sidebar,
@@ -24,6 +25,7 @@ import { Icons } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const menuItems = [
+  { href: '/events', label: 'Events', icon: PartyPopper },
   { href: '/register', label: 'Register', icon: Home },
   { href: '/sessions', label: 'Set Session', icon: CalendarClock },
   { href: '/express-checkin', label: 'Express Check-in', icon: QrCode },

@@ -16,7 +16,7 @@ export default function IntroPage() {
     }, 1500); // Welcome shows for 1.5s
 
     const appNameTimer = setTimeout(() => {
-      router.push('/register');
+      router.push('/events');
     }, 3500); // App name shows for 2s then navigates
 
     return () => {
