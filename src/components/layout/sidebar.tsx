@@ -10,7 +10,8 @@ import {
   QrCode,
   Wrench,
   Users,
-  PartyPopper
+  PartyPopper,
+  UserPlus
 } from 'lucide-react';
 import {
   Sidebar,
@@ -26,7 +27,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const menuItems = [
   { href: '/events', label: 'Events', icon: PartyPopper },
-  { href: '/register', label: 'Register', icon: Home },
+  { href: '/register', label: 'Register', icon: UserPlus },
   { href: '/sessions', label: 'Set Session', icon: CalendarClock },
   { href: '/express-checkin', label: 'Express Check-in', icon: QrCode },
   { href: '/return-mode', label: 'Return Mode', icon: CheckCheck },
