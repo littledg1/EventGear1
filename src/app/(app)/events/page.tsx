@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -9,9 +10,10 @@ import { events as mockEvents } from '@/lib/data';
 import { Calendar, MapPin } from 'lucide-react';
 
 export default function EventsPage() {
-  const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [currentDateTime, setCurrentDateTime] = useState<Date | null>(null);
 
   useEffect(() => {
+    setCurrentDateTime(new Date());
     const timer = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
@@ -28,7 +30,7 @@ export default function EventsPage() {
           <div className="mb-8">
             <h1 className="font-headline text-4xl font-bold">Welcome</h1>
             <p className="text-lg text-muted-foreground">
-              {format(currentDateTime, 'EEEE, MMMM do, yyyy - h:mm:ss a')}
+              {currentDateTime ? format(currentDateTime, 'EEEE, MMMM do, yyyy - h:mm:ss a') : 'Loading...'}
             </p>
           </div>
 
