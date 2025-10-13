@@ -11,7 +11,8 @@ import {
   Wrench,
   Users,
   PartyPopper,
-  UserPlus
+  UserPlus,
+  BarChart
 } from 'lucide-react';
 import {
   Sidebar,
@@ -31,7 +32,7 @@ const menuItems = [
   { href: '/express-checkin', label: 'Express Check-in', icon: QrCode },
   { href: '/return-mode', label: 'Return Mode', icon: CheckCheck },
   { href: '/issues', label: 'Manage Issues', icon: Wrench },
-  { href: '/outstanding', label: 'Outstanding', icon: Users },
+  { href: '/event-stats', label: 'Event Stats', icon: BarChart },
   { href: '/settings', label: 'Settings', icon: Cog },
 ];
 
