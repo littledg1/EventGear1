@@ -3,8 +3,18 @@
 
 import { AppHeader } from '@/components/layout/header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Users, CheckCircle, Package, CalendarDays } from 'lucide-react';
+import { Users, CheckCircle, Package, CalendarDays, Headset } from 'lucide-react';
 import { format } from 'date-fns';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
 export default function EventStatsPage() {
   const stats = [
@@ -18,6 +28,19 @@ export default function EventStatsPage() {
     startDate: new Date('2024-08-15T09:00:00'),
     endDate: new Date('2024-08-16T21:00:00'),
   };
+  
+    const headsetUsageData = [
+      { time: '09:00', checkedOut: 25, checkedIn: 0 },
+      { time: '10:00', checkedOut: 75, checkedIn: 5 },
+      { time: '11:00', checkedOut: 110, checkedIn: 15 },
+      { time: '12:00', checkedOut: 150, checkedIn: 30 },
+      { time: '13:00', checkedOut: 130, checkedIn: 60 },
+      { time: '14:00', checkedOut: 115, checkedIn: 95 },
+      { time: '15:00', checkedOut: 90, checkedIn: 130 },
+      { time: '16:00', checkedOut: 60, checkedIn: 160 },
+      { time: '17:00', checkedOut: 30, checkedIn: 180 },
+    ];
+
 
   return (
     <div className="flex h-full flex-col">
@@ -41,6 +64,36 @@ export default function EventStatsPage() {
             </Card>
           ))}
         </div>
+
+        <Card className="mt-6">
+            <CardHeader>
+                <CardTitle className="font-headline flex items-center gap-2">
+                    <Headset className="size-5" />
+                    Headset Activity Over Time
+                </CardTitle>
+                <CardDescription>
+                    Number of headsets checked out and returned during the event.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="pl-2">
+                <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={headsetUsageData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="time" />
+                    <YAxis />
+                    <Tooltip
+                        contentStyle={{
+                            backgroundColor: 'hsl(var(--background))',
+                            borderColor: 'hsl(var(--border))'
+                        }}
+                    />
+                    <Legend />
+                    <Line type="monotone" dataKey="checkedOut" name="Checked Out" stroke="hsl(var(--primary))" strokeWidth={2} />
+                    <Line type="monotone" dataKey="checkedIn" name="Returned" stroke="hsl(var(--accent))" strokeWidth={2} />
+                </LineChart>
+                </ResponsiveContainer>
+            </CardContent>
+        </Card>
         
         <Card className="mt-6">
           <CardHeader>
