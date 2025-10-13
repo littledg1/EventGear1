@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -29,6 +30,7 @@ export default function LoginPage() {
     if (loginMode === 'admin') {
       if (username === 'SilentSpeakEasyCDMX' && password === 'SilentDisco2025!') {
         localStorage.setItem('userRole', 'admin');
+        localStorage.setItem('username', 'Admin User');
         router.push('/events');
          toast({
           title: 'Admin Login Successful',
@@ -44,6 +46,7 @@ export default function LoginPage() {
     } else {
       // For now, any user login is successful for demonstration
       localStorage.setItem('userRole', 'user');
+      localStorage.setItem('username', username);
       router.push('/events');
     }
   };

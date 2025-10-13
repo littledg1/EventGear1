@@ -1,3 +1,4 @@
+
 export type Attendee = {
   id: string;
   name: string;
@@ -30,6 +31,7 @@ export type Event = {
   name: string;
   date: Date;
   location: string;
+  createdBy: string; // username
 };
 
 export const attendees: Attendee[] = [
@@ -49,7 +51,7 @@ export const issues: Issue[] = [
 ];
 
 export const events: Event[] = [
-  { id: 'evt-1', name: 'Summer Fest 2024', date: new Date('2024-08-15T09:00:00'), location: 'Central Park' },
-  { id: 'evt-2', name: 'Tech Conference 2024', date: new Date('2024-09-22T10:00:00'), location: 'Convention Center' },
-  { id: 'evt-3', name: 'Winter Gala 2024', date: new Date('2024-12-05T18:00:00'), location: 'Grand Ballroom' },
+  { id: 'evt-1', name: 'Summer Fest 2024', date: new Date('2024-08-15T09:00:00'), location: 'Central Park', createdBy: 'new_user' },
+  { id: 'evt-2', name: 'Tech Conference 2024', date: new Date('2024-09-22T10:00:00'), location: 'Convention Center', createdBy: 'other_user' },
+  { id: 'evt-3', name: 'Winter Gala 2024', date: new Date('2024-12-05T18:00:00'), location: 'Grand Ballroom', createdBy: 'new_user' },
 ];

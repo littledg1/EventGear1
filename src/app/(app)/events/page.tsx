@@ -8,19 +8,39 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { events as mockEvents } from '@/lib/data';
 import { Calendar, MapPin } from 'lucide-react';
+import type { Event } from '@/lib/data';
 
 export default function EventsPage() {
   const [currentDateTime, setCurrentDateTime] = useState<Date | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
+  const [userEvents, setUserEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     setCurrentDateTime(new Date());
     const timer = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
+
+    const role = localStorage.getItem('userRole');
+    const name = localStorage.getItem('username');
+    setUserRole(role);
+    setUsername(name);
+
     return () => clearInterval(timer);
   }, []);
 
-  const sortedEvents = [...mockEvents].sort((a, b) => a.date.getTime() - b.date.getTime());
+  useEffect(() => {
+    if (userRole && username) {
+      if (userRole === 'admin') {
+        setUserEvents(mockEvents);
+      } else {
+        setUserEvents(mockEvents.filter(event => event.createdBy === username));
+      }
+    }
+  }, [userRole, username]);
+
+  const sortedEvents = [...userEvents].sort((a, b) => a.date.getTime() - b.date.getTime());
 
   return (
     <div className="flex h-full flex-col">
@@ -28,7 +48,7 @@ export default function EventsPage() {
       <main className="flex-1 overflow-y-auto p-4 md:p-6">
         <div className="mx-auto max-w-4xl">
           <div className="mb-8">
-            <h1 className="font-headline text-4xl font-bold">Welcome</h1>
+            <h1 className="font-headline text-4xl font-bold">Welcome{username ? `, ${username}` : ''}</h1>
             <p className="text-lg text-muted-foreground">
               {currentDateTime ? format(currentDateTime, 'EEEE, MMMM do, yyyy - h:mm:ss a') : 'Loading...'}
             </p>
@@ -37,7 +57,7 @@ export default function EventsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="font-headline">Upcoming Events</CardTitle>
-              <CardDescription>Here are the events lined up.</CardDescription>
+              <CardDescription>Here are the events lined up for you.</CardDescription>
             </CardHeader>
             <CardContent>
               {sortedEvents.length > 0 ? (
