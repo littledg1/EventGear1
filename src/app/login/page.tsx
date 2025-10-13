@@ -14,19 +14,44 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { toast } = useToast();
   const [loginMode, setLoginMode] = useState<'user' | 'admin'>('user');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // For now, just navigate to the events page on login
-    router.push('/events');
+    
+    if (loginMode === 'admin') {
+      if (username === 'SilentSpeakEasyCDMX' && password === 'SilentDisco2025!') {
+        localStorage.setItem('userRole', 'admin');
+        router.push('/events');
+         toast({
+          title: 'Admin Login Successful',
+          description: 'Redirecting to the dashboard.',
+        });
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Invalid Credentials',
+          description: 'The admin username or password you entered is incorrect.',
+        });
+      }
+    } else {
+      // For now, any user login is successful for demonstration
+      localStorage.setItem('userRole', 'user');
+      router.push('/events');
+    }
   };
 
   const toggleLoginMode = () => {
     setLoginMode(loginMode === 'user' ? 'admin' : 'user');
+    setUsername('');
+    setPassword('');
   };
 
   return (
@@ -54,13 +79,25 @@ export default function LoginPage() {
               <Label htmlFor="username">
                 {loginMode === 'user' ? 'Username' : 'Admin Username'}
               </Label>
-              <Input id="username" placeholder={loginMode === 'user' ? 'username' : 'admin_user'} required />
+              <Input 
+                id="username" 
+                placeholder={loginMode === 'user' ? 'username' : 'admin_user'} 
+                required 
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">
                  {loginMode === 'user' ? 'Password' : 'Admin Password'}
               </Label>
-              <Input id="password" type="password" required />
+              <Input 
+                id="password" 
+                type="password" 
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
           </CardContent>
           <CardFooter className="flex-col gap-4">
