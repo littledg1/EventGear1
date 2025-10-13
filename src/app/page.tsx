@@ -16,7 +16,7 @@ export default function IntroPage() {
     }, 1500); // Welcome shows for 1.5s
 
     const appNameTimer = setTimeout(() => {
-      router.push('/events');
+      router.push('/login');
     }, 3500); // App name shows for 2s then navigates
 
     return () => {
@@ -27,7 +27,7 @@ export default function IntroPage() {
 
   return (
     <main className="flex h-screen w-full flex-col items-center justify-center bg-background text-foreground">
-      <div className="relative h-20 w-80">
+      <div className="relative h-20 w-80 text-center">
         <div
           className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
             showWelcome ? 'opacity-100' : 'opacity-0'
