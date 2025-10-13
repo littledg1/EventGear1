@@ -41,8 +41,17 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+// Add password to the user type for local state
+type User = (typeof attendees)[0] & { password?: string };
+
 export default function UsersPage() {
-  const [users, setUsers] = useState(attendees.slice(0, 2)); // Use some attendees as initial users
+  // Initialize with some default passwords for the mock users
+  const initialUsers: User[] = attendees.slice(0, 2).map((user, index) => ({
+    ...user,
+    password: `password${index + 1}`
+  }));
+  
+  const [users, setUsers] = useState<User[]>(initialUsers);
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -54,12 +63,13 @@ export default function UsersPage() {
   });
 
   function onSubmit(values: FormValues) {
-    const newUser = {
+    const newUser: User = {
       id: `user-${Date.now()}`,
       name: values.username,
       email: `${values.username}@example.com`,
       phone: '',
       avatarUrl: `https://picsum.photos/seed/${values.username}/100/100`,
+      password: values.password, // Store the password
     };
     setUsers((prevUsers) => [...prevUsers, newUser]);
     toast({
@@ -98,6 +108,7 @@ export default function UsersPage() {
                       <TableRow>
                         <TableHead>Username</TableHead>
                         <TableHead>Email</TableHead>
+                        <TableHead>Password</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -106,6 +117,7 @@ export default function UsersPage() {
                         <TableRow key={user.id}>
                           <TableCell className="font-medium">{user.name}</TableCell>
                           <TableCell>{user.email}</TableCell>
+                          <TableCell>{user.password}</TableCell>
                           <TableCell className="text-right">
                              <Button variant="ghost" size="icon" onClick={() => handleDeleteUser(user.id)}>
                                 <Trash2 className="size-4 text-destructive"/>
