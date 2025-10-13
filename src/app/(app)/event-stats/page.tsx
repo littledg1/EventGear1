@@ -3,7 +3,8 @@
 
 import { AppHeader } from '@/components/layout/header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Users, CheckCircle, Package } from 'lucide-react';
+import { Users, CheckCircle, Package, CalendarDays } from 'lucide-react';
+import { format } from 'date-fns';
 
 export default function EventStatsPage() {
   const stats = [
@@ -11,6 +12,12 @@ export default function EventStatsPage() {
     { title: 'Total Checked Out Headsets', value: '350', icon: Package, description: 'Total number of headset check-outs during the event.' },
     { title: 'Max Checked Out at Once', value: '120', icon: CheckCircle, description: 'The peak number of headsets in use simultaneously.' },
   ];
+
+  const currentEvent = {
+    title: 'Summer Fest 2024',
+    startDate: new Date('2024-08-15T09:00:00'),
+    endDate: new Date('2024-08-16T21:00:00'),
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -34,6 +41,38 @@ export default function EventStatsPage() {
             </Card>
           ))}
         </div>
+        
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle className="font-headline flex items-center gap-2">
+              <CalendarDays className="size-5" />
+              Current Event Details
+            </CardTitle>
+            <CardDescription>Information about the event being tracked.</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <p className="font-semibold text-lg">{currentEvent.title}</p>
+              <p className="text-sm text-muted-foreground">Event Title</p>
+            </div>
+            <div>
+              <p className="font-semibold">{format(currentEvent.startDate, 'MMMM do, yyyy')}</p>
+              <p className="text-sm text-muted-foreground">Beginning Date</p>
+            </div>
+            <div>
+              <p className="font-semibold">{format(currentEvent.endDate, 'MMMM do, yyyy')}</p>
+              <p className="text-sm text-muted-foreground">End Date</p>
+            </div>
+             <div>
+              <p className="font-semibold">{format(currentEvent.startDate, 'h:mm a')}</p>
+              <p className="text-sm text-muted-foreground">Beginning Time</p>
+            </div>
+            <div>
+              <p className="font-semibold">{format(currentEvent.endDate, 'h:mm a')}</p>
+              <p className="text-sm text-muted-foreground">End Time</p>
+            </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );
