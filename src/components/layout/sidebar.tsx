@@ -29,7 +29,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 const menuItems = [
   { href: '/events', label: 'Events', icon: PartyPopper },
   { href: '/sessions', label: 'Set Session', icon: CalendarClock },
-  { href: '/register', label: 'Register Attendee', icon: UserPlus },
   { href: '/express-checkin', label: 'Express Check-in', icon: QrCode },
   { href: '/return-mode', label: 'Return Mode', icon: CheckCheck },
   { href: '/issues', label: 'Manage Issues', icon: Wrench },
