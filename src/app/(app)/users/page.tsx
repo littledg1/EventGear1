@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -31,7 +32,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useToast } from '@/hooks/use-toast';
-import { UserPlus, Trash2 } from 'lucide-react';
+import { UserPlus, Trash2, KeyRound } from 'lucide-react';
 import { attendees } from '@/lib/data';
 
 const formSchema = z.object({
@@ -41,15 +42,11 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-// Add password to the user type for local state
-type User = (typeof attendees)[0] & { password?: string };
+// Remove password from the user type for local state
+type User = (typeof attendees)[0];
 
 export default function UsersPage() {
-  // Initialize with some default passwords for the mock users
-  const initialUsers: User[] = attendees.slice(0, 2).map((user, index) => ({
-    ...user,
-    password: `password${index + 1}`
-  }));
+  const initialUsers: User[] = attendees.slice(0, 2);
   
   const [users, setUsers] = useState<User[]>(initialUsers);
   const { toast } = useToast();
@@ -69,8 +66,8 @@ export default function UsersPage() {
       email: `${values.username}@example.com`,
       phone: '',
       avatarUrl: `https://picsum.photos/seed/${values.username}/100/100`,
-      password: values.password, // Store the password
     };
+    // In a real app, you would securely send this to a backend to create the user.
     setUsers((prevUsers) => [...prevUsers, newUser]);
     toast({
       title: 'User Created',
@@ -108,7 +105,6 @@ export default function UsersPage() {
                       <TableRow>
                         <TableHead>Username</TableHead>
                         <TableHead>Email</TableHead>
-                        <TableHead>Password</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -117,8 +113,11 @@ export default function UsersPage() {
                         <TableRow key={user.id}>
                           <TableCell className="font-medium">{user.name}</TableCell>
                           <TableCell>{user.email}</TableCell>
-                          <TableCell>{user.password}</TableCell>
                           <TableCell className="text-right">
+                             <Button variant="ghost" size="icon" onClick={() => toast({ title: 'Feature not implemented' })}>
+                                <KeyRound className="size-4"/>
+                                <span className="sr-only">Reset Password</span>
+                            </Button>
                              <Button variant="ghost" size="icon" onClick={() => handleDeleteUser(user.id)}>
                                 <Trash2 className="size-4 text-destructive"/>
                                 <span className="sr-only">Delete User</span>
