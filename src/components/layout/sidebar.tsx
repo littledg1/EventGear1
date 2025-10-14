@@ -14,6 +14,7 @@ import {
   PartyPopper,
   UserPlus,
   BarChart,
+  ClipboardList,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -33,6 +34,7 @@ const menuItems = [
   { href: '/sessions', label: 'Set Session', icon: CalendarClock },
   { href: '/express-checkin', label: 'Check Out', icon: QrCode },
   { href: '/return-mode', label: 'Return Mode', icon: CheckCheck },
+  { href: '/outstanding', label: 'Outstanding', icon: ClipboardList },
   { href: '/issues', label: 'Manage Issues', icon: Wrench },
   { href: '/event-stats', label: 'Event Stats', icon: BarChart },
 ];
