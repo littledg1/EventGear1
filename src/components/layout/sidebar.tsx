@@ -30,7 +30,7 @@ import { useEffect, useState } from 'react';
 const menuItems = [
   { href: '/events', label: 'Events', icon: PartyPopper },
   { href: '/sessions', label: 'Set Session', icon: CalendarClock },
-  { href: '/express-checkin', label: 'Express Check-in', icon: QrCode },
+  { href: '/express-checkin', label: 'Check In', icon: QrCode },
   { href: '/return-mode', label: 'Return Mode', icon: CheckCheck },
   { href: '/issues', label: 'Manage Issues', icon: Wrench },
   { href: '/event-stats', label: 'Event Stats', icon: BarChart },

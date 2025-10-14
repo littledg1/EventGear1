@@ -8,11 +8,11 @@ export default function ExpressCheckinPage() {
 
   return (
     <div className="flex h-full flex-col">
-      <AppHeader title="Express Check-in" />
+      <AppHeader title="Check In" />
       <main className="flex-1 overflow-y-auto p-4 md:p-6">
         <Card className="mx-auto max-w-lg text-center">
           <CardHeader>
-            <CardTitle className="font-headline text-3xl">Attendee Express Check-in</CardTitle>
+            <CardTitle className="font-headline text-3xl">Attendee Check-in</CardTitle>
             <CardDescription>
               Display or print this QR code for your attendees. Scanning it allows them to pre-fill their information on their own device, generating a personal QR code for faster check-in at the registration desk.
             </CardDescription>
@@ -21,7 +21,7 @@ export default function ExpressCheckinPage() {
              {qrCodeImage && (
                 <Image
                   src={qrCodeImage.imageUrl}
-                  alt="Express Check-in QR Code"
+                  alt="Check-in QR Code"
                   width={300}
                   height={300}
                   className="rounded-lg border bg-white p-2"
