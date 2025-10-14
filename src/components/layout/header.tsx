@@ -14,8 +14,10 @@ export function AppHeader({ title, children }: AppHeaderProps) {
             <h1 className="font-headline text-2xl font-bold tracking-tight">
             {title}
             </h1>
-            {children}
         </div>
+      </div>
+       <div className="flex items-center gap-4">
+        {children}
       </div>
     </header>
   );

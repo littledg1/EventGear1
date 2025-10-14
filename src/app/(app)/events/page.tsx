@@ -2,15 +2,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { format } from 'date-fns';
 import { AppHeader } from '@/components/layout/header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { events as mockEvents } from '@/lib/data';
-import { Calendar, MapPin } from 'lucide-react';
+import { Calendar, MapPin, LogOut } from 'lucide-react';
 import type { Event } from '@/lib/data';
 
 export default function EventsPage() {
+  const router = useRouter();
   const [currentDateTime, setCurrentDateTime] = useState<Date | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
@@ -40,11 +42,22 @@ export default function EventsPage() {
     }
   }, [userRole, username]);
 
+  const handleSignOut = () => {
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('username');
+    router.push('/login');
+  };
+
   const sortedEvents = [...userEvents].sort((a, b) => a.date.getTime() - b.date.getTime());
 
   return (
     <div className="flex h-full flex-col">
-      <AppHeader title="Events" />
+      <AppHeader title="Events">
+        <Button variant="outline" size="sm" onClick={handleSignOut}>
+          <LogOut className="mr-2 size-4" />
+          Sign Out
+        </Button>
+      </AppHeader>
       <main className="flex-1 overflow-y-auto p-4 md:p-6">
         <div className="mx-auto max-w-4xl">
           <div className="mb-8">
