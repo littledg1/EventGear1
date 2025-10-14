@@ -1,7 +1,6 @@
 
 'use client';
 
-import Image from 'next/image';
 import { AppHeader } from '@/components/layout/header';
 import {
   Card,
@@ -10,27 +9,13 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import { equipment, attendees } from '@/lib/data';
-import { Badge } from '@/components/ui/badge';
-import { AlertCircle } from 'lucide-react';
+import { equipment } from '@/lib/data';
+import { AlertCircle, Headphones } from 'lucide-react';
 
 export default function OutstandingPage() {
   const outstandingEquipment = equipment.filter(
     (item) => item.status === 'checked-out'
   );
-
-  const getAttendeeName = (attendeeId: string) => {
-    const attendee = attendees.find((a) => a.id === attendeeId);
-    return attendee ? attendee.name : 'Unknown';
-  };
 
   return (
     <div className="flex h-full flex-col">
@@ -48,50 +33,32 @@ export default function OutstandingPage() {
           </CardHeader>
           <CardContent>
             {outstandingEquipment.length > 0 ? (
-              <div className="rounded-lg border">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[80px]">Image</TableHead>
-                      <TableHead>Serial Number</TableHead>
-                      <TableHead>Type</TableHead>
-                      <TableHead>Assigned To</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {outstandingEquipment.map((item) => (
-                      <TableRow key={item.id}>
-                        <TableCell>
-                          <Image
-                            src={item.imageUrl}
-                            alt={item.type}
-                            width={50}
-                            height={50}
-                            className="rounded-md"
-                          />
-                        </TableCell>
-                        <TableCell className="font-mono text-xs">
-                          {item.serialNumber}
-                        </TableCell>
-                        <TableCell>{item.type}</TableCell>
-                        <TableCell>
-                          {item.assignedTo ? (
-                            getAttendeeName(item.assignedTo)
-                          ) : (
-                            <Badge variant="destructive">Unassigned</Badge>
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {outstandingEquipment.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex flex-col items-center gap-2 rounded-lg border bg-card p-4 text-center text-card-foreground shadow-sm"
+                  >
+                    <Headphones className="size-12 text-muted-foreground" />
+                    <div className="text-sm">
+                      <p className="font-semibold">{item.type}</p>
+                      <p className="font-mono text-xs text-muted-foreground">
+                        {item.serialNumber}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
-                <div className="flex h-48 flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted text-center">
-                    <AlertCircle className="size-10 text-muted-foreground" />
-                    <p className="mt-4 text-lg font-medium text-muted-foreground">No Outstanding Items</p>
-                    <p className="text-sm text-muted-foreground/80">All equipment has been returned.</p>
-                </div>
+              <div className="flex h-48 flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted text-center">
+                <AlertCircle className="size-10 text-muted-foreground" />
+                <p className="mt-4 text-lg font-medium text-muted-foreground">
+                  No Outstanding Items
+                </p>
+                <p className="text-sm text-muted-foreground/80">
+                  All equipment has been returned.
+                </p>
+              </div>
             )}
           </CardContent>
         </Card>
