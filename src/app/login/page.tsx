@@ -65,7 +65,7 @@ export default function LoginPage() {
              <div className="mx-auto mb-4 flex items-center justify-center gap-2">
                 <Icons.logo className="size-10 text-primary" />
                 <h1 className="font-headline text-2xl font-semibold text-primary">
-                    EventGear
+                    Silent Speakeasy
                 </h1>
             </div>
             <CardTitle className="font-headline text-2xl">

@@ -68,7 +68,7 @@ export function AppSidebar() {
         <div className="flex items-center gap-2 p-2">
           <Icons.logo className="size-8 text-primary" />
           <h1 className="font-headline text-xl font-semibold text-primary">
-            EventGear
+            Silent Speakeasy
           </h1>
         </div>
       </SidebarHeader>
