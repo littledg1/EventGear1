@@ -1,17 +1,15 @@
+
 'use client'
 
-import Image from 'next/image';
 import { AppHeader } from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Calendar } from '@/components/ui/calendar';
 
 export default function SessionsPage() {
-  const qrCodeImage = PlaceHolderImages.find(p => p.id === 'qr-code-1');
 
   return (
     <div className="flex h-full flex-col">
@@ -27,20 +25,10 @@ export default function SessionsPage() {
               <CardHeader>
                 <CardTitle className="font-headline">Summer Fest 2024</CardTitle>
                 <CardDescription>
-                  This is the currently active session. To sync another device, scan the QR code below or tap on the session from the list on the other device.
+                  This is the currently active session. To sync another device, tap on the session from the list on the other device.
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col items-center gap-4">
-                {qrCodeImage && (
-                    <Image
-                      src={qrCodeImage.imageUrl}
-                      alt="Session QR Code"
-                      width={256}
-                      height={256}
-                      className="rounded-lg"
-                      data-ai-hint={qrCodeImage.imageHint}
-                    />
-                )}
                 <div className="text-center">
                     <p className="font-medium">Session ends in: 23 hours 14 minutes</p>
                     <p className="text-sm text-muted-foreground">Started on: July 26, 2024</p>
