@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { categorizeEquipmentIssue, CategorizeEquipmentIssueOutput } from '@/ai/flows/categorize-equipment-issues';
+// import { categorizeEquipmentIssue, CategorizeEquipmentIssueOutput } from '@/ai/flows/categorize-equipment-issues';
 import { AppHeader } from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -21,6 +21,25 @@ const formSchema = z.object({
 });
 
 type FormValues = z.infer<typeof formSchema>;
+
+// Mock type for CategorizeEquipmentIssueOutput
+type CategorizeEquipmentIssueOutput = {
+  severity: 'low' | 'medium' | 'high';
+  category: string;
+  escalate: boolean;
+};
+
+// Mock function for categorizeEquipmentIssue
+async function categorizeEquipmentIssue(input: { issueReport: string }): Promise<CategorizeEquipmentIssueOutput> {
+  console.log('AI categorization is temporarily disabled.', input);
+  await new Promise(resolve => setTimeout(resolve, 500));
+  return {
+    severity: 'medium',
+    category: 'unknown',
+    escalate: false,
+  };
+}
+
 
 export default function ManageIssuesPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,8 +58,9 @@ export default function ManageIssuesPage() {
     setError(null);
     setResult(null);
     try {
-      const output = await categorizeEquipmentIssue({ issueReport: values.issueReport });
-      setResult(output);
+      // const output = await categorizeEquipmentIssue({ issueReport: values.issueReport });
+      // setResult(output);
+      setError("AI feature is temporarily disabled due to a configuration issue.");
     } catch (e) {
       console.error(e);
       setError('Failed to categorize issue. Please try again.');
