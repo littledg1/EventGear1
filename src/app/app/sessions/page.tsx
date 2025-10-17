@@ -129,7 +129,7 @@ export default function SessionsPage() {
                 <CardDescription>
                   Give your event a unique name, date, and time. Activating it will start a tracking period.
                 </CardDescription>
-              </Header>
+              </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="session-name">Session Name</Label>
