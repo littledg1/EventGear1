@@ -1,6 +1,7 @@
 
 'use client'
 
+import * as React from 'react';
 import { AppHeader } from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -10,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Calendar } from '@/components/ui/calendar';
 
 export default function SessionsPage() {
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   return (
     <div className="flex h-full flex-col">
@@ -54,7 +56,8 @@ export default function SessionsPage() {
                   <Label>Event Date</Label>
                    <Calendar
                       mode="single"
-                      selected={new Date()}
+                      selected={date}
+                      onSelect={setDate}
                       className="rounded-md border"
                     />
                 </div>
