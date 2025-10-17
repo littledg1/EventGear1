@@ -42,7 +42,7 @@ export default function SessionsPage() {
               <CardHeader>
                 <CardTitle className="font-headline">Create a New Session</CardTitle>
                 <CardDescription>
-                  Give your event a unique name and date. Activating it will start a 24-hour tracking period.
+                  Give your event a unique name, date, and time. Activating it will start a tracking period.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -57,6 +57,16 @@ export default function SessionsPage() {
                       selected={new Date()}
                       className="rounded-md border"
                     />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="start-time">Start Time</Label>
+                    <Input id="start-time" type="time" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="end-time">End Time</Label>
+                    <Input id="end-time" type="time" />
+                  </div>
                 </div>
                 <Button className="w-full">Save & Activate</Button>
               </CardContent>
